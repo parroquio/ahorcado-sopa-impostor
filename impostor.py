@@ -1,13 +1,9 @@
 import random
+import os
+import time
+import sys
+import select
 
-def impostor(n):
-    impostor = random.randint(1,n)
-    return impostor
-
-
-def palabra_pueblo(x):
-        
-# Lista de palabras para el juego del impostor (Objetos y conceptos populares y ambiguos)
 palabras = [
     # Redes Sociales y Tecnología (Simplificada)
     "historia", "perfil", "usuario", "etiqueta", "filtro", "directo", "reels", "meme", "tendencia", "viral",
@@ -57,7 +53,7 @@ palabras = [
     "guitarra", "piano", "tambor", "flauta", "trompeta", "violín", "teclado", "partitura", "melodía", "ritmo",
     # Lugares y Partes del Cuerpo
     "escalera", "ascensor", "pasaje", "sótano", "ático", "garaje", "balcón", "terraza", "patio", "porche",
-    "pasillo", "vestíbulo", "recepción", "taquilla", "mostrador", "caja", "entrada", "salida", "meta", "poste",
+    "pasillo", "vestíbulo", "recepción", "Mendívil" "taquilla", "mostrador", "caja", "entrada", "salida", "meta", "poste",
     "cabeza", "cuerpo", "alma", "corazón", "brazo", "pierna",
     "mano", "pie", "dedo", "uña", "rodilla", "codo", "hombro", "espalda", "cuello", "rostro",
     "ojo", "nariz", "boca", "oreja", "pelo", "piel", "lengua", "diente", "bigote", "barba",
@@ -105,7 +101,104 @@ palabras = [
     "pueblo", "ciudad", "barrio", "calle", "plaza", "avenida", "carretera", "semáforo", "puerto", "aeropuerto",
     "tren", "autobús", "tranvía", "taxista", "billete", "tarjeta", "máquina", "ticket", "parada", "estación"
     ]
-    palabra = palabras[x]
 
-    return palabra
+def impostor(n):
+    #Esta funncion determina al impostor, siendo el n-ésimo jugador.
+    impostor = random.randint(0, n-1)
+    return impostor
+
+
+
+
+print("Bienvenido al juego del impostor.")
+print("En este juego, uno de los jugadores será el impostor, el resto, el pueblo.")
+print("El pueblo sabe una palabra, la cual deben evitar que el impostor la identifique.")
+print("En cada ronda, el pueblo debe decir una palabra parecida o relacionada con la palabra secreta.")
+print("El sentido del juego es antihorario.")
+print("Al finalizar cada ronda, el pueblo debe votar quién creen que es el impostor.")
+print("El jugador con más votos será el impostor.")
+print("Si hay empate, o todos los votos en blanco, no se expulsa a nadie.")
+print("El juego termina cuando no queden impostores, que habrá ganado el pueblo,")
+print("o cuando queden 2 o menos jugadores, que habrá ganado el impostor.")
+
+
+x = random.randint(0, len(palabras)-1)
+palabra = palabras[x]
+print(palabra)
+
+n = int(input("Introduce el número de jugadores: "))
+
+jugadores = []
+
+for i in range(n):
+    jugador = input("Introduce el nombre del jugador {}: ".format(i+1))
+    jugadores.append(jugador)
+
+res = "S"
+
+while res == "s" or res == "S":
+    impostor = jugadores[impostor(n)]
+
+
+    for nombre in jugadores:
+        os.system('clear')
+        print("Pase el dispositivo a {}".format(nombre))
+        input("Presiona Enter para ver tu rol...")
+        
+        if nombre == impostor:
+            print("Eres el \033[38;2;255;0;0mimpostor\033[0m.")
+        else:
+            print("Eres \033[38;2;0;255;0mpueblo\033[0m.")
+            print("La palabra es: \033[1m{}\033[0m".format(palabra))
+        
+        input("Presiona Enter para ocultar tu rol...")
+        os.system('clear')
+
+    minutos = n
+    segundos = int(minutos * 60)
+
+    while segundos > 0:
+        mins, secs = divmod(segundos, 60)
+        tiempo_formato = '{:02d}:{:02d}'.format(mins, secs)
+        print("¡A jugar! Tiempo restante: {} (Pulsa Enter para terminar)".format(tiempo_formato), end='\r')
+        
+        r, _, _ = select.select([sys.stdin], [], [], 1)
+        if r:
+            input()
+            break
+            
+        segundos -= 1
+
+    os.system('clear')
+    print("\n¡Tiempo agotado! Es hora de votar.")
+
+    for nombre in range(len(jugadores)):
+        print("{}.\t".format(nombre+1), end='')
+        print(jugadores[nombre])
+        print()
+
+
+    voto = input("Introduzca el resultado de la votación (Vacío en caso de empate): ")
+
+    if voto == "":
+        print("Empate")
+    else:
+        print("Se ha votado a {}.".format(jugadores[int(voto)-1]))
+        print("\n")
+
+        if jugadores[int(voto)-1] == impostor:
+            print("{} era el \033[38;2;255;0;0mimpostor\033[0m.")
+        else:
+            print("{} era \033[1minocente\033[0m.")
+
+res = input("¿Quieres jugar de nuevo con los mismos jugadores? (s/n): ")
+
+
+    
+
+
+    
+
+
+
 
