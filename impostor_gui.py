@@ -1,5 +1,6 @@
+import customtkinter as ctk
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import messagebox
 import random
 import time
 import os
@@ -103,21 +104,15 @@ PALABRAS = [
     "tren", "autobús", "tranvía", "taxista", "billete", "tarjeta", "máquina", "ticket", "parada", "estación"
 ]
 
-class ImpostorApp(tk.Tk):
+class ImpostorApp(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Juego del Impostor")
         self.geometry("600x500")
-        self.configure(bg="#2c3e50")
         
-        # Estilos
-        self.style = ttk.Style()
-        self.style.theme_use('clam')
-        self.style.configure('TFrame', background='#2c3e50')
-        self.style.configure('TLabel', background='#2c3e50', foreground='white', font=('Helvetica', 14))
-        self.style.configure('Header.TLabel', font=('Helvetica', 24, 'bold'))
-        self.style.configure('TButton', font=('Helvetica', 12), padding=10, background='#3498db', foreground='white')
-        self.style.map('TButton', background=[('active', '#2980b9')])
+        # Configuración de tema
+        ctk.set_appearance_mode("System")
+        ctk.set_default_color_theme("blue")
         
         # Estado del juego
         self.jugadores_originales = []
@@ -134,42 +129,43 @@ class ImpostorApp(tk.Tk):
 
     def show_start_screen(self):
         self.clear_window()
-        frame = ttk.Frame(self)
+        frame = ctk.CTkFrame(self)
         frame.pack(expand=True, fill='both', padx=20, pady=20)
         
-        ttk.Label(frame, text="Bienvenido al", style='Header.TLabel').pack(pady=10)
-        ttk.Label(frame, text="JUEGO DEL IMPOSTOR", style='Header.TLabel', foreground='#e74c3c').pack(pady=10)
+        ctk.CTkLabel(frame, text="Bienvenido al", font=("Roboto", 24, "bold")).pack(pady=(40, 10))
+        ctk.CTkLabel(frame, text="JUEGO DEL IMPOSTOR", font=("Roboto", 32, "bold"), text_color="#e74c3c").pack(pady=10)
         
-        ttk.Label(frame, text="Un jugador será el impostor.\nEl resto, el pueblo.\n¡Descúbrelo antes de que sea tarde!", justify='center').pack(pady=30)
+        ctk.CTkLabel(frame, text="Un jugador será el impostor.\nEl resto, el pueblo.\n¡Descúbrelo antes de que sea tarde!", 
+                     font=("Roboto", 16), justify='center').pack(pady=30)
         
-        ttk.Button(frame, text="Comenzar", command=self.show_setup_screen).pack(pady=20)
+        ctk.CTkButton(frame, text="Comenzar", command=self.show_setup_screen, font=("Roboto", 16, "bold"), height=50, corner_radius=20).pack(pady=20)
 
     def show_setup_screen(self):
         self.clear_window()
-        frame = ttk.Frame(self)
+        frame = ctk.CTkFrame(self)
         frame.pack(expand=True, fill='both', padx=20, pady=20)
         
-        ttk.Label(frame, text="Configuración", style='Header.TLabel').pack(pady=20)
+        ctk.CTkLabel(frame, text="Configuración", font=("Roboto", 24, "bold")).pack(pady=20)
         
-        ttk.Label(frame, text="Introduce los nombres de los jugadores:").pack(pady=10)
+        ctk.CTkLabel(frame, text="Introduce los nombres de los jugadores:", font=("Roboto", 14)).pack(pady=10)
         
-        self.entries_frame = ttk.Frame(frame)
-        self.entries_frame.pack(fill='both', expand=True)
+        self.entries_frame = ctk.CTkScrollableFrame(frame, height=200)
+        self.entries_frame.pack(fill='both', expand=True, padx=10, pady=10)
         
         self.player_entries = []
         self.add_player_entry()
         self.add_player_entry()
-        self.add_player_entry() # Empezar con 3 campos
+        self.add_player_entry() 
         
-        btn_frame = ttk.Frame(frame)
+        btn_frame = ctk.CTkFrame(frame, fg_color="transparent")
         btn_frame.pack(pady=20)
         
-        ttk.Button(btn_frame, text="+ Jugador", command=self.add_player_entry).pack(side='left', padx=5)
-        ttk.Button(btn_frame, text="Jugar", command=self.start_game).pack(side='left', padx=5)
+        ctk.CTkButton(btn_frame, text="+ Jugador", command=self.add_player_entry, width=120).pack(side='left', padx=10)
+        ctk.CTkButton(btn_frame, text="Jugar", command=self.start_game, width=120, fg_color="#2ecc71", hover_color="#27ae60").pack(side='left', padx=10)
 
     def add_player_entry(self):
-        entry = ttk.Entry(self.entries_frame, font=('Helvetica', 12))
-        entry.pack(pady=5, fill='x', padx=50)
+        entry = ctk.CTkEntry(self.entries_frame, font=('Roboto', 14), placeholder_text=f"Jugador {len(self.player_entries)+1}")
+        entry.pack(pady=5, fill='x', padx=10)
         self.player_entries.append(entry)
 
     def start_game(self):
@@ -197,34 +193,34 @@ class ImpostorApp(tk.Tk):
             return
 
         self.clear_window()
-        frame = ttk.Frame(self)
+        frame = ctk.CTkFrame(self)
         frame.pack(expand=True, fill='both', padx=20, pady=20)
         
         player_name = self.jugadores[self.current_player_index]
         
-        ttk.Label(frame, text="Pase el dispositivo a:", style='Header.TLabel').pack(pady=30)
-        ttk.Label(frame, text=player_name, font=('Helvetica', 32, 'bold'), foreground='#f1c40f').pack(pady=20)
+        ctk.CTkLabel(frame, text="Pase el dispositivo a:", font=("Roboto", 24)).pack(pady=(60, 20))
+        ctk.CTkLabel(frame, text=player_name, font=('Roboto', 40, 'bold'), text_color='#f1c40f').pack(pady=20)
         
-        ttk.Button(frame, text="Ver mi rol", command=lambda: self.show_role_screen(player_name)).pack(pady=40)
+        ctk.CTkButton(frame, text="Ver mi rol", command=lambda: self.show_role_screen(player_name), height=50, font=("Roboto", 16, "bold")).pack(pady=60)
 
     def show_role_screen(self, player_name):
         self.clear_window()
-        frame = ttk.Frame(self)
+        frame = ctk.CTkFrame(self)
         frame.pack(expand=True, fill='both', padx=20, pady=20)
         
-        ttk.Label(frame, text=f"Hola {player_name}", style='Header.TLabel').pack(pady=20)
+        ctk.CTkLabel(frame, text=f"Hola {player_name}", font=("Roboto", 24)).pack(pady=20)
         
         if player_name == self.impostor:
-            ttk.Label(frame, text="Eres el", font=('Helvetica', 18)).pack(pady=10)
-            ttk.Label(frame, text="IMPOSTOR", font=('Helvetica', 36, 'bold'), foreground='#e74c3c').pack(pady=10)
-            ttk.Label(frame, text="¡Engaña a todos!", font=('Helvetica', 14)).pack(pady=10)
+            ctk.CTkLabel(frame, text="Eres el", font=('Roboto', 18)).pack(pady=10)
+            ctk.CTkLabel(frame, text="IMPOSTOR", font=('Roboto', 48, 'bold'), text_color='#e74c3c').pack(pady=10)
+            ctk.CTkLabel(frame, text="¡Engaña a todos!", font=('Roboto', 16)).pack(pady=10)
         else:
-            ttk.Label(frame, text="Eres", font=('Helvetica', 18)).pack(pady=10)
-            ttk.Label(frame, text="PUEBLO", font=('Helvetica', 36, 'bold'), foreground='#2ecc71').pack(pady=10)
-            ttk.Label(frame, text="La palabra secreta es:", font=('Helvetica', 14)).pack(pady=20)
-            ttk.Label(frame, text=self.palabra, font=('Helvetica', 28, 'bold', 'underline'), foreground='white').pack(pady=10)
+            ctk.CTkLabel(frame, text="Eres", font=('Roboto', 18)).pack(pady=10)
+            ctk.CTkLabel(frame, text="PUEBLO", font=('Roboto', 48, 'bold'), text_color='#2ecc71').pack(pady=10)
+            ctk.CTkLabel(frame, text="La palabra secreta es:", font=('Roboto', 16)).pack(pady=20)
+            ctk.CTkLabel(frame, text=self.palabra, font=('Roboto', 32, 'bold', 'underline')).pack(pady=10)
             
-        ttk.Button(frame, text="Ocultar y Siguiente", command=self.next_player).pack(pady=40)
+        ctk.CTkButton(frame, text="Ocultar y Siguiente", command=self.next_player, height=50, font=("Roboto", 16, "bold")).pack(pady=40)
 
     def next_player(self):
         self.current_player_index += 1
@@ -232,20 +228,20 @@ class ImpostorApp(tk.Tk):
 
     def show_timer_screen(self):
         self.clear_window()
-        frame = ttk.Frame(self)
+        frame = ctk.CTkFrame(self)
         frame.pack(expand=True, fill='both', padx=20, pady=20)
         
-        ttk.Label(frame, text="¡A JUGAR!", style='Header.TLabel').pack(pady=20)
-        ttk.Label(frame, text="Debatid y encontrad al impostor.", justify='center').pack(pady=10)
+        ctk.CTkLabel(frame, text="¡A JUGAR!", font=("Roboto", 32, "bold")).pack(pady=20)
+        ctk.CTkLabel(frame, text="Debatid y encontrad al impostor.", font=("Roboto", 16)).pack(pady=10)
         
         self.time_left = len(self.jugadores) * 60
-        self.timer_label = ttk.Label(frame, text=self.format_time(self.time_left), font=('Helvetica', 48, 'bold'))
-        self.timer_label.pack(pady=30)
+        self.timer_label = ctk.CTkLabel(frame, text=self.format_time(self.time_left), font=('Roboto', 60, 'bold'))
+        self.timer_label.pack(pady=40)
         
         self.timer_running = True
         self.update_timer()
         
-        ttk.Button(frame, text="Terminar y Votar", command=self.stop_timer_and_vote).pack(pady=20)
+        ctk.CTkButton(frame, text="Terminar y Votar", command=self.stop_timer_and_vote, fg_color="#e74c3c", hover_color="#c0392b", height=50, font=("Roboto", 16, "bold")).pack(pady=40)
 
     def format_time(self, seconds):
         mins, secs = divmod(seconds, 60)
@@ -254,7 +250,7 @@ class ImpostorApp(tk.Tk):
     def update_timer(self):
         if self.timer_running and self.time_left > 0:
             self.time_left -= 1
-            self.timer_label.config(text=self.format_time(self.time_left))
+            self.timer_label.configure(text=self.format_time(self.time_left))
             self.after(1000, self.update_timer)
         elif self.time_left == 0:
             self.stop_timer_and_vote()
@@ -265,54 +261,54 @@ class ImpostorApp(tk.Tk):
 
     def show_voting_screen(self):
         self.clear_window()
-        frame = ttk.Frame(self)
+        frame = ctk.CTkFrame(self)
         frame.pack(expand=True, fill='both', padx=20, pady=20)
         
-        ttk.Label(frame, text="VOTACIÓN", style='Header.TLabel').pack(pady=20)
-        ttk.Label(frame, text="¿Quién es el impostor?").pack(pady=10)
+        ctk.CTkLabel(frame, text="VOTACIÓN", font=("Roboto", 24, "bold")).pack(pady=20)
+        ctk.CTkLabel(frame, text="¿Quién es el impostor?", font=("Roboto", 16)).pack(pady=10)
+        
+        scroll_frame = ctk.CTkScrollableFrame(frame)
+        scroll_frame.pack(fill='both', expand=True, padx=10, pady=10)
         
         for player in self.jugadores:
-            ttk.Button(frame, text=player, command=lambda p=player: self.process_vote(p)).pack(pady=5, fill='x', padx=50)
+            ctk.CTkButton(scroll_frame, text=player, command=lambda p=player: self.process_vote(p)).pack(pady=5, fill='x', padx=20)
             
-        ttk.Button(frame, text="Empate / Blanco", command=lambda: self.process_vote(None)).pack(pady=20, fill='x', padx=50)
+        ctk.CTkButton(frame, text="Empate / Blanco", command=lambda: self.process_vote(None), fg_color="gray", hover_color="darkgray").pack(pady=20, fill='x', padx=50)
 
     def process_vote(self, voted_player):
         self.clear_window()
-        frame = ttk.Frame(self)
+        frame = ctk.CTkFrame(self)
         frame.pack(expand=True, fill='both', padx=20, pady=20)
         
         if voted_player is None:
-            ttk.Label(frame, text="Empate", style='Header.TLabel').pack(pady=20)
-            ttk.Label(frame, text="Nadie ha sido expulsado.").pack(pady=10)
+            ctk.CTkLabel(frame, text="Empate", font=("Roboto", 24, "bold")).pack(pady=20)
+            ctk.CTkLabel(frame, text="Nadie ha sido expulsado.", font=("Roboto", 16)).pack(pady=10)
             self.check_game_over(frame, None)
         else:
-            ttk.Label(frame, text=f"Se ha votado a {voted_player}", style='Header.TLabel').pack(pady=20)
+            ctk.CTkLabel(frame, text=f"Se ha votado a {voted_player}", font=("Roboto", 24, "bold")).pack(pady=20)
             
             if voted_player == self.impostor:
-                ttk.Label(frame, text="¡ERA EL IMPOSTOR!", font=('Helvetica', 24, 'bold'), foreground='#2ecc71').pack(pady=20)
-                ttk.Label(frame, text="¡El Pueblo Gana!", font=('Helvetica', 18)).pack(pady=10)
+                ctk.CTkLabel(frame, text="¡ERA EL IMPOSTOR!", font=('Roboto', 32, 'bold'), text_color='#2ecc71').pack(pady=20)
+                ctk.CTkLabel(frame, text="¡El Pueblo Gana!", font=('Roboto', 24)).pack(pady=10)
                 self.show_game_over_buttons(frame)
             else:
-                ttk.Label(frame, text="Era INOCENTE", font=('Helvetica', 24, 'bold'), foreground='#e74c3c').pack(pady=20)
+                ctk.CTkLabel(frame, text="Era INOCENTE", font=('Roboto', 32, 'bold'), text_color='#e74c3c').pack(pady=20)
                 self.jugadores.remove(voted_player)
                 self.check_game_over(frame, voted_player)
 
     def check_game_over(self, frame, voted_player):
-        # Verificar si quedan impostores (si llegamos aquí y se votó a alguien, NO era el impostor)
-        # El impostor sigue vivo.
-        
         if len(self.jugadores) <= 2:
-            ttk.Label(frame, text="Solo quedan 2 jugadores.", font=('Helvetica', 18)).pack(pady=10)
-            ttk.Label(frame, text="¡El Impostor Gana!", font=('Helvetica', 24, 'bold'), foreground='#e74c3c').pack(pady=10)
-            ttk.Label(frame, text=f"El impostor era: {self.impostor}", font=('Helvetica', 14)).pack(pady=10)
+            ctk.CTkLabel(frame, text="Solo quedan 2 jugadores.", font=('Roboto', 18)).pack(pady=10)
+            ctk.CTkLabel(frame, text="¡El Impostor Gana!", font=('Roboto', 32, 'bold'), text_color='#e74c3c').pack(pady=10)
+            ctk.CTkLabel(frame, text=f"El impostor era: {self.impostor}", font=('Roboto', 16)).pack(pady=10)
             self.show_game_over_buttons(frame)
         else:
-            ttk.Button(frame, text="Siguiente Ronda", command=lambda: self.start_round(new_game=False)).pack(pady=30)
+            ctk.CTkButton(frame, text="Siguiente Ronda", command=lambda: self.start_round(new_game=False), height=50, font=("Roboto", 16, "bold")).pack(pady=30)
 
     def show_game_over_buttons(self, frame):
-        ttk.Button(frame, text="Jugar otra vez (Mismos jugadores)", command=lambda: self.start_round(new_game=True)).pack(pady=10, fill='x', padx=50)
-        ttk.Button(frame, text="Nueva Partida (Nuevos jugadores)", command=self.show_setup_screen).pack(pady=10, fill='x', padx=50)
-        ttk.Button(frame, text="Salir", command=self.quit).pack(pady=10, fill='x', padx=50)
+        ctk.CTkButton(frame, text="Jugar otra vez (Mismos jugadores)", command=lambda: self.start_round(new_game=True)).pack(pady=10, fill='x', padx=50)
+        ctk.CTkButton(frame, text="Nueva Partida (Nuevos jugadores)", command=self.show_setup_screen).pack(pady=10, fill='x', padx=50)
+        ctk.CTkButton(frame, text="Salir", command=self.quit, fg_color="#c0392b", hover_color="#e74c3c").pack(pady=10, fill='x', padx=50)
 
 if __name__ == "__main__":
     app = ImpostorApp()
