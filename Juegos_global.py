@@ -17,7 +17,7 @@ CYAN = "\033[36m"
 WHITE = "\033[37m"
 
 def clear():
-    os.system('clear')
+    os.system('cls')
 
 def print_header():
     print(f"{CYAN}╔══════════════════════════════════════════════════════════════╗{RESET}")
@@ -642,7 +642,7 @@ elif opcion == "2":
 
 
     #Texto inicial que explica el juego.
-    os.system('clear')
+    os.system('cls')
 
     print("Bienvenido al juego del impostor.")
     time.sleep(2.5)
@@ -664,7 +664,7 @@ elif opcion == "2":
     print("o cuando queden 2 o menos jugadores, que habrá ganado el impostor.")
     time.sleep(6)
 
-    os.system('clear')
+    os.system('cls')
 
     #Asigna la palabra secreta en la variable "palabra".
     x = random.randint(0, len(palabras)-1)
@@ -672,7 +672,7 @@ elif opcion == "2":
 
     #Aquí se añaden los jugadores.
     n = int(input("Introduce el número de jugadores: "))
-    os.system('clear')
+    os.system('cls')
 
     jugadores = []
 
@@ -691,7 +691,7 @@ elif opcion == "2":
     #Se tiene que pasar el dispositivo a cada jugador para que pueda ver su rol.
 
     for nombre in jugadores:
-        os.system('clear')
+        os.system('cls')
         print("Pase el dispositivo a {}".format(nombre))
         input("Presiona Enter para ver tu rol...")
         
@@ -702,7 +702,7 @@ elif opcion == "2":
             print("La palabra es: \033[1m{}\033[0m".format(palabra))
         
         input("Presiona Enter para ocultar tu rol...")
-        os.system('clear')
+        os.system('cls')
 
     #Se inicia el juego.
     while res == "s" or res == "S":
@@ -727,7 +727,7 @@ elif opcion == "2":
                 
             segundos -= 1
 
-        os.system('clear')
+        os.system('cls')
         print("\n¡Tiempo agotado! Es hora de votar.")
 
         #Se muestra la lista de jugadores para que el pueblo pueda votar.
@@ -769,7 +769,7 @@ elif opcion == "2":
             if partida_acabada == False:
                 res = input("¿Quieres jugar otra ronda? (s/n): ")
                 if res == "s" or res == "S":
-                    os.system('clear')
+                    os.system('cls')
                     
 
             else:
@@ -783,7 +783,7 @@ elif opcion == "2":
                     impostor = jugadores[seleccionar_impostor(n)]
 
                     for nombre in jugadores:
-                        os.system('clear')
+                        os.system('cls')
                         print("Pase el dispositivo a {}".format(nombre))
                         input("Presiona Enter para ver tu rol...")
         
@@ -794,7 +794,7 @@ elif opcion == "2":
                             print("La palabra es: \033[1m{}\033[0m".format(palabra))
         
                         input("Presiona Enter para ocultar tu rol...")
-                        os.system('clear')
+                        os.system('cls')
 
 
 elif opcion == "3":

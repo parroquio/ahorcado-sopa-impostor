@@ -110,7 +110,7 @@ def seleccionar_impostor(n):
 
 
 #Texto inicial que explica el juego.
-os.system('clear')
+os.system('cls')
 
 print("Bienvenido al juego del impostor.")
 time.sleep(2.5)
@@ -132,7 +132,7 @@ print("El juego termina cuando no queden impostores, que habrá ganado el pueblo
 print("o cuando queden 2 o menos jugadores, que habrá ganado el impostor.")
 time.sleep(6)
 
-os.system('clear')
+os.system('cls')
 
 #Asigna la palabra secreta en la variable "palabra".
 x = random.randint(0, len(palabras)-1)
@@ -140,7 +140,7 @@ palabra = palabras[x]
 
 #Aquí se añaden los jugadores.
 n = int(input("Introduce el número de jugadores: "))
-os.system('clear')
+os.system('cls')
 
 jugadores = []
 
@@ -159,7 +159,7 @@ impostor = jugadores[seleccionar_impostor(n)]
 #Se tiene que pasar el dispositivo a cada jugador para que pueda ver su rol.
 
 for nombre in jugadores:
-    os.system('clear')
+    os.system('cls')
     print("Pase el dispositivo a {}".format(nombre))
     input("Presiona Enter para ver tu rol...")
     
@@ -170,7 +170,7 @@ for nombre in jugadores:
         print("La palabra es: \033[1m{}\033[0m".format(palabra))
     
     input("Presiona Enter para ocultar tu rol...")
-    os.system('clear')
+    os.system('cls')
 
 #Se inicia el juego.
 while res == "s" or res == "S":
@@ -195,7 +195,7 @@ while res == "s" or res == "S":
             
         segundos -= 1
 
-    os.system('clear')
+    os.system('cls')
     print("\n¡Tiempo agotado! Es hora de votar.")
 
     #Se muestra la lista de jugadores para que el pueblo pueda votar.
@@ -237,7 +237,7 @@ while res == "s" or res == "S":
         if partida_acabada == False:
             res = input("¿Quieres jugar otra ronda? (s/n): ")
             if res == "s" or res == "S":
-                os.system('clear')
+                os.system('cls')
                 
 
         else:
@@ -251,7 +251,7 @@ while res == "s" or res == "S":
                 impostor = jugadores[seleccionar_impostor(n)]
 
                 for nombre in jugadores:
-                    os.system('clear')
+                    os.system('cls')
                     print("Pase el dispositivo a {}".format(nombre))
                     input("Presiona Enter para ver tu rol...")
     
@@ -262,5 +262,5 @@ while res == "s" or res == "S":
                         print("La palabra es: \033[1m{}\033[0m".format(palabra))
     
                     input("Presiona Enter para ocultar tu rol...")
-                    os.system('clear')
+                    os.system('cls')
 
