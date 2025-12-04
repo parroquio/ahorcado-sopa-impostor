@@ -102,7 +102,7 @@ palabras = [
     "tren", "autobús", "tranvía", "taxista", "billete", "tarjeta", "máquina", "ticket", "parada", "estación"
     ]
 
-def impostor(n):
+def seleccionar_impostor(n):
     #Esta funncion determina al impostor, siendo el n-ésimo jugador.
     impostor = random.randint(0, n-1)
     return impostor
@@ -110,23 +110,37 @@ def impostor(n):
 
 
 
+os.system('clear')
+
 print("Bienvenido al juego del impostor.")
+time.sleep(2.5)
 print("En este juego, uno de los jugadores será el impostor, el resto, el pueblo.")
+time.sleep(3)
 print("El pueblo sabe una palabra, la cual deben evitar que el impostor la identifique.")
+time.sleep(3)
 print("En cada ronda, el pueblo debe decir una palabra parecida o relacionada con la palabra secreta.")
+time.sleep(4)
 print("El sentido del juego es antihorario.")
+time.sleep(2.5)
 print("Al finalizar cada ronda, el pueblo debe votar quién creen que es el impostor.")
+time.sleep(3)
 print("El jugador con más votos será el impostor.")
+time.sleep(2.5)
 print("Si hay empate, o todos los votos en blanco, no se expulsa a nadie.")
+time.sleep(3)
 print("El juego termina cuando no queden impostores, que habrá ganado el pueblo,")
 print("o cuando queden 2 o menos jugadores, que habrá ganado el impostor.")
+time.sleep(6)
+
+os.system('clear')
 
 
 x = random.randint(0, len(palabras)-1)
 palabra = palabras[x]
-print(palabra)
+
 
 n = int(input("Introduce el número de jugadores: "))
+os.system('clear')
 
 jugadores = []
 
@@ -134,25 +148,34 @@ for i in range(n):
     jugador = input("Introduce el nombre del jugador {}: ".format(i+1))
     jugadores.append(jugador)
 
+primeros_jugadores = jugadores.copy()
+
 res = "S"
 
+
+
+impostor = jugadores[seleccionar_impostor(n)]
+
+for nombre in jugadores:
+    os.system('clear')
+    print("Pase el dispositivo a {}".format(nombre))
+    input("Presiona Enter para ver tu rol...")
+    
+    if nombre == impostor:
+        print("Eres el \033[38;2;255;0;0mimpostor\033[0m.")
+    else:
+        print("Eres \033[38;2;0;255;0mpueblo\033[0m.")
+        print("La palabra es: \033[1m{}\033[0m".format(palabra))
+    
+    input("Presiona Enter para ocultar tu rol...")
+    os.system('clear')
+
 while res == "s" or res == "S":
-    impostor = jugadores[impostor(n)]
+
+    contador_impostores = 0
+    partida_acabada = False
 
 
-    for nombre in jugadores:
-        os.system('clear')
-        print("Pase el dispositivo a {}".format(nombre))
-        input("Presiona Enter para ver tu rol...")
-        
-        if nombre == impostor:
-            print("Eres el \033[38;2;255;0;0mimpostor\033[0m.")
-        else:
-            print("Eres \033[38;2;0;255;0mpueblo\033[0m.")
-            print("La palabra es: \033[1m{}\033[0m".format(palabra))
-        
-        input("Presiona Enter para ocultar tu rol...")
-        os.system('clear')
 
     minutos = n
     segundos = int(minutos * 60)
@@ -183,22 +206,55 @@ while res == "s" or res == "S":
     if voto == "":
         print("Empate")
     else:
-        print("Se ha votado a {}.".format(jugadores[int(voto)-1]))
+        print("Se ha votado a \033[1m{}\033[0m.".format(jugadores[int(voto)-1]))
         print("\n")
 
         if jugadores[int(voto)-1] == impostor:
-            print("{} era el \033[38;2;255;0;0mimpostor\033[0m.")
+            print("{} era el \033[38;2;255;0;0mimpostor\033[0m.".format(jugadores[int(voto)-1]))
         else:
-            print("{} era \033[1minocente\033[0m.")
+            print("{} era \033[1minocente\033[0m.".format(jugadores[int(voto)-1]))
+        
+        jugadores.remove(jugadores[int(voto)-1])
 
-res = input("¿Quieres jugar de nuevo con los mismos jugadores? (s/n): ")
+        for nombre in jugadores:
+            if nombre == impostor:
+                contador_impostores += 1
+        
+        if contador_impostores == 0:
+            print("Todos los impostores han sido expulsados. El pueblo ha ganado.")
+            partida_acabada = True
 
+        elif len(jugadores) <= 2:
+            print("Solo quedan 2 jugadores. El impostor ha ganado.")
+            partida_acabada = True
 
+        if partida_acabada == False:
+            res = input("¿Quieres jugar otra ronda? (s/n): ")
+            if res == "s" or res == "S":
+                os.system('clear')
+                
+
+        else:
+            res = input("¿Quieres jugar otra partida con los mismos jugadores? (s/n): ")
+            if res == "s" or res == "S":
+                jugadores = primeros_jugadores.copy()
+                contador_impostores = 0
+                partida_acabada = False
+                x = random.randint(0, len(palabras)-1)
+                palabra = palabras[x]
+                impostor = jugadores[seleccionar_impostor(n)]
+
+                for nombre in jugadores:
+                    os.system('clear')
+                    print("Pase el dispositivo a {}".format(nombre))
+                    input("Presiona Enter para ver tu rol...")
     
-
-
+                    if nombre == impostor:
+                        print("Eres el \033[38;2;255;0;0mimpostor\033[0m.")
+                    else:
+                        print("Eres \033[38;2;0;255;0mpueblo\033[0m.")
+                        print("La palabra es: \033[1m{}\033[0m".format(palabra))
     
-
-
-
+                    input("Presiona Enter para ocultar tu rol...")
+                    os.system('clear')
 
