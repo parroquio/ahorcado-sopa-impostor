@@ -293,23 +293,31 @@ if opcion == "1":
     #función para localizar palabra en la sopa y saber si esta bien
     def encontrar_palabra_en_sopa(palabras_sopa,posiciones_palabras,palabras_acertadas, tamaño, palabras_por_sopa):
         #el usuario elige la fila de la inicial de la palabra (y verifica que sea un número y en el rango posible)
+        time.sleep(2)
         intento_fila_inicial=input("Introduce el número de la fila en la que se encuentra la inicial de la palabra: ")
         while intento_fila_inicial.isdigit()==False or int(intento_fila_inicial)>tamaño:
+            time.sleep(0.5)
             intento_fila_inicial=input("No puede ser ni mas grande que el tamaño de la sopa ni un caracter, pruebe otra vez: ")
         intento_fila_inicial=int(intento_fila_inicial)       
         #el usuario elige la columna de la inicial de la palabra (y verifica que sea un número y en el rango posible)
+        time.sleep(0.5)
         intento_columna_inicial=input("Introduce el número de la columna en la que se encuentra la inicial de la palabra: ")
         while intento_columna_inicial.isdigit()==False or int(intento_columna_inicial)>tamaño:
+            time.sleep(0.5)
             intento_columna_inicial=input("No puede ser ni mas grande que el tamaño de la sopa ni un caracter, pruebe otra vez: ")
         intento_columna_inicial=int(intento_columna_inicial)
         #el usuario elige la fila de la última letra de la palabra (y verifica que sea un número y en el rango posible)
+        time.sleep(0.5)
         intento_fila_final=input("Introduce el número de la fila en la que se encuentra la última letra de la palabra: ")
         while intento_fila_final.isdigit()==False or int(intento_fila_final)>tamaño:
+            time.sleep(0.5)
             intento_fila_final=input("No puede ser ni mas grande que el tamaño de la sopa ni un caracter, pruebe otra vez: ")
         intento_fila_final=int(intento_fila_final)    
         #el usuario elige la columna de la última letra de la palabra (y verifica que sea un número y en el rango posible)
+        time.sleep(0.5)
         intento_columna_final=input("Introduce el número de la columna en la que se encuentra la última letra de la palabra: ")
         while intento_columna_final.isdigit()==False or int(intento_columna_final)>tamaño:
+            time.sleep(0.5)
             intento_columna_final=input("No puede ser ni mas grande que el tamaño de la sopa ni un caracter, pruebe otra vez: ")
         intento_columna_final=int(intento_columna_final)
         #como ya he verificado que es un número, pasamos el input a int
@@ -441,21 +449,32 @@ if opcion == "1":
         palabras_sopa=[]
         posiciones_palabras=[]
         palabras_acertadas=[]
-        print("\033[1;31mBIENVENIDO A LA SOPA DE LETRAS!!!\033[0m")
+        print("\033[1;32mBIENVENIDO A LA SOPA DE LETRAS!!! \033[0m")
+        time.sleep(2)
+        print("Esta versión de la sopa de letras tiene dos modos: ")
+        time.sleep(2)
         #elige modo al que jugar normal o emoji
         print("1. Modo Normal")
+        time.sleep(2)
         print("2. Modo Emoji")
+        time.sleep(2)
         modo=input("Introduce 1 o 2 dependiendo del modo que quieras jugar: ")
         while modo!="1" and modo!="2":
+            time.sleep(0.5)
             modo=input("Introduce unicamente 1 o 2 dependiendo del modo que quieras jugar: ")
         clear_output(wait=True)
         #elige el tamaño de la sopa, verifica que no sea menor que 4x4  
         if modo=="1":
-            print("\033[1;31mHas elegido el modo normal, tienes que encontrar las palabras en la sopa de letras\033[0m")
+            time.sleep(0.5)
+            print("\033[1;32mHas elegido el modo normal, tienes que encontrar las palabras en la sopa de letras\033[0m")
+            time.sleep(5)
         else:
+            time.sleep(0.5)
             print("\033[1;33mHas elegido el modo emoji, cada emoji representa un objeto/animal cuya inicial es con la que debes crear la palabra a buscar\033[0m")
+            time.sleep(5)
         tamaño=input("Por favor, introduce de que tamaño quieres la sopa de letras (Min 4): ")
         while tamaño.isdigit()==False or (int(tamaño)<4):
+            time.sleep(0.5)
             tamaño=input("No puedes introducir otros caracteres o número menores a 4, prube otra vez: ")
         tamaño=int(tamaño)
         #pone un limite a el número de palabras que puede añadir para ese tamaño de sopa
@@ -466,8 +485,10 @@ if opcion == "1":
             max_palabras_por_sopa=tamaño-1
             max_palabras_por_sopa=str(max_palabras_por_sopa)
         #pide cuantas palabras quiere en la sopa con el maximo ya establecido y verifica que este dentro del rango y sea un número
+        time.sleep(1.5)
         palabras_por_sopa=input(f"Introduce de cuantas palabras quieres que haya en la sopa (Max {max_palabras_por_sopa}): ")
         while palabras_por_sopa.isdigit()==False or palabras_por_sopa>max_palabras_por_sopa:
+            time.sleep(0.5)
             palabras_por_sopa=input(f"No puedes introducir otros caracteres o número mayores a {max_palabras_por_sopa}, prube otra vez: ")
         palabras_por_sopa=int(palabras_por_sopa)
         inicializar_matriz(tamaño) #matriz de ceros
@@ -482,12 +503,17 @@ if opcion == "1":
         while len(palabras_sopa)>0:
             #si cambia el valor de len(palabras_sopa) significa que en la funcion encontrar_palabra el usuaario ha encontrado la palabra y borrado la palabra de la lista palabras_sopa
             if palabras_restantes!=len(palabras_sopa):
+                time.sleep(1)
                 print("\033[1;32mHAS ACERTADO LA PALABRA!!! SIGUE ASI!!! \033[0m") 
+                time.sleep(2)
             #por lo contrario si no se ha borrado ninguna palabra, significa que el usuario ha fallado
             elif contador!=0:
+                time.sleep(1)
                 print("\033[1;31mHAS FALLADO, SIGUELO INTENTANDO!!! \033[0m") 
+                time.sleep(2)
             palabras_restantes = len(palabras_sopa)
             print() #dejo un hueco
+            time.sleep(1)
             imprimir_matriz(matriz, modo) #imprimimos la matriz ya con las palabras y letras al azar (y sus ejes)
             #bucle for para imprimir las palabras que hay que buscar en la sopa
             for i in range (len(palabras_sopa)):
@@ -498,14 +524,12 @@ if opcion == "1":
             print() #dejo un hueco
             #ejecuto la funcion que permite al usuario encontrar palabra y verifica si la ha encontrado
             encontrar_palabra_en_sopa(palabras_sopa,posiciones_palabras,palabras_acertadas, tamaño, palabras_por_sopa)
-            #imprime las palabras que le quedan al usuario y las que ha acertado
-            if contador!=0:
-                print("Palabras que te quedan en la sopa: ", palabras_sopa)
-                print("Palabras acertadas: ", palabras_acertadas)
             contador+=1
             clear_output(wait=True) #limpia pantalla en cada intento para que sea mas estetico
         #final del juego
+        time.sleep(0.5)
         print("\033[1;32mHAS GANADO EL JUEGO!!! ENHORABUENA!!! \033[0m")
+        time.sleep(2.5)
         print("Quieres seguir jugando (Introduce 's' si quieres seguir jugando y cualquier otra letra si no)?")
         n=input()
     
