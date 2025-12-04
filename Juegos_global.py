@@ -1373,5 +1373,3 @@ elif opcion == "3":
         print('¡¡¡¡AHORCADO!!!! :( ')
         print()
         print('La palabra que buscabas era: ', palabra)
-
-#OHIAN, PEGA AQUI TU CODIGO E IMPORTA LAS LIBRERIAS AL PRINCIPIO DEL CODIGO.
