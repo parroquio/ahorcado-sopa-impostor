@@ -1,8 +1,12 @@
+# REVISAR TEMPORIZADOR
+
+
 import random
 import os
 import time
 import sys
 import select
+import msvcrt
 
 palabras = [
     # Redes Sociales y Tecnología (Simplificada)
@@ -188,12 +192,18 @@ while res == "s" or res == "S":
         tiempo_formato = '{:02d}:{:02d}'.format(mins, secs)
         print("¡A jugar! Tiempo restante: {} (Pulsa Enter para terminar)".format(tiempo_formato), end='\r')
         
-        r, _, _ = select.select([sys.stdin], [], [], 1)
-        if r:
-            input()
-            break
-            
-        segundos -= 1
+        start_time = time.time()
+        input_detected = False
+        while time.time() - start_time < 1:
+            if msvcrt.kbhit():
+                input()
+                input_detected = True
+                break
+                time.sleep(0.1)
+            if input_detected:
+                break
+                
+            segundos -= 1
 
     os.system('cls')
     print("\n¡Tiempo agotado! Es hora de votar.")
