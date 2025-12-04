@@ -4,6 +4,7 @@ import sys
 import random
 import select
 from IPython.display import clear_output
+import msvcrt
 
 # Colores ANSI
 RESET = "\033[0m"
@@ -720,9 +721,16 @@ elif opcion == "2":
             tiempo_formato = '{:02d}:{:02d}'.format(mins, secs)
             print("¡A jugar! Tiempo restante: {} (Pulsa Enter para terminar)".format(tiempo_formato), end='\r')
             
-            r, _, _ = select.select([sys.stdin], [], [], 1)
-            if r:
-                input()
+            
+            start_time = time.time()
+            input_detected = False
+            while time.time() - start_time < 1:
+                if msvcrt.kbhit():
+                    input()
+                    input_detected = True
+                    break
+                time.sleep(0.1)
+            if input_detected:
                 break
                 
             segundos -= 1
