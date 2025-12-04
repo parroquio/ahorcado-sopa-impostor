@@ -109,7 +109,7 @@ def seleccionar_impostor(n):
 
 
 
-
+#Texto inicial que explica el juego.
 os.system('clear')
 
 print("Bienvenido al juego del impostor.")
@@ -134,11 +134,11 @@ time.sleep(6)
 
 os.system('clear')
 
-
+#Asigna la palabra secreta en la variable "palabra".
 x = random.randint(0, len(palabras)-1)
 palabra = palabras[x]
 
-
+#Aquí se añaden los jugadores.
 n = int(input("Introduce el número de jugadores: "))
 os.system('clear')
 
@@ -152,9 +152,11 @@ primeros_jugadores = jugadores.copy()
 
 res = "S"
 
-
-
+#Se selecciona al impostor.
 impostor = jugadores[seleccionar_impostor(n)]
+
+#Se muestra el rol de cada jugador. 
+#Se tiene que pasar el dispositivo a cada jugador para que pueda ver su rol.
 
 for nombre in jugadores:
     os.system('clear')
@@ -170,6 +172,7 @@ for nombre in jugadores:
     input("Presiona Enter para ocultar tu rol...")
     os.system('clear')
 
+#Se inicia el juego.
 while res == "s" or res == "S":
 
     contador_impostores = 0
@@ -179,7 +182,7 @@ while res == "s" or res == "S":
 
     minutos = n
     segundos = int(minutos * 60)
-
+#Menú que se ve durante la partida. Hay el mismo numero de jugadores que de minutos (5 jugadores = 5 minutos).
     while segundos > 0:
         mins, secs = divmod(segundos, 60)
         tiempo_formato = '{:02d}:{:02d}'.format(mins, secs)
@@ -195,12 +198,13 @@ while res == "s" or res == "S":
     os.system('clear')
     print("\n¡Tiempo agotado! Es hora de votar.")
 
+    #Se muestra la lista de jugadores para que el pueblo pueda votar.
     for nombre in range(len(jugadores)):
         print("{}.\t".format(nombre+1), end='')
         print(jugadores[nombre])
         print()
 
-
+    #Se recibe el voto del pueblo.
     voto = input("Introduzca el resultado de la votación (Vacío en caso de empate): ")
 
     if voto == "":
@@ -209,6 +213,7 @@ while res == "s" or res == "S":
         print("Se ha votado a \033[1m{}\033[0m.".format(jugadores[int(voto)-1]))
         print("\n")
 
+        #Se expulsa al jugador votado.
         if jugadores[int(voto)-1] == impostor:
             print("{} era el \033[38;2;255;0;0mimpostor\033[0m.".format(jugadores[int(voto)-1]))
         else:
@@ -216,6 +221,7 @@ while res == "s" or res == "S":
         
         jugadores.remove(jugadores[int(voto)-1])
 
+        #Se verifica que sigan quedando impostores.
         for nombre in jugadores:
             if nombre == impostor:
                 contador_impostores += 1
