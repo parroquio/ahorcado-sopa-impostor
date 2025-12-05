@@ -466,11 +466,11 @@ if opcion == "1":
         if modo=="1":
             time.sleep(0.5)
             print("\033[1;32mHas elegido el modo normal, tienes que encontrar las palabras en la sopa de letras\033[0m")
-            time.sleep(5)
+            time.sleep(4)
         else:
             time.sleep(0.5)
             print("\033[1;33mHas elegido el modo emoji, cada emoji representa un objeto/animal cuya inicial es con la que debes crear la palabra a buscar\033[0m")
-            time.sleep(5)
+            time.sleep(4)
         tamaño=input("Por favor, introduce de que tamaño quieres la sopa de letras (Min 4): ")
         while tamaño.isdigit()==False or (int(tamaño)<4):
             time.sleep(0.5)
@@ -484,7 +484,7 @@ if opcion == "1":
             max_palabras_por_sopa=tamaño-1
             max_palabras_por_sopa=str(max_palabras_por_sopa)
         #pide cuantas palabras quiere en la sopa con el maximo ya establecido y verifica que este dentro del rango y sea un número
-        time.sleep(1.5)
+        time.sleep(1)
         palabras_por_sopa=input(f"Introduce de cuantas palabras quieres que haya en la sopa (Max {max_palabras_por_sopa}): ")
         while palabras_por_sopa.isdigit()==False or palabras_por_sopa>max_palabras_por_sopa:
             time.sleep(0.5)
@@ -502,12 +502,12 @@ if opcion == "1":
         while len(palabras_sopa)>0:
             #si cambia el valor de len(palabras_sopa) significa que en la funcion encontrar_palabra el usuaario ha encontrado la palabra y borrado la palabra de la lista palabras_sopa
             if palabras_restantes!=len(palabras_sopa):
-                time.sleep(1)
+                time.sleep(0.5)
                 print("\033[1;32mHAS ACERTADO LA PALABRA!!! SIGUE ASI!!! \033[0m") 
                 time.sleep(2)
             #por lo contrario si no se ha borrado ninguna palabra, significa que el usuario ha fallado
             elif contador!=0:
-                time.sleep(1)
+                time.sleep(0.5)
                 print("\033[1;31mHAS FALLADO, SIGUELO INTENTANDO!!! \033[0m") 
                 time.sleep(2)
             palabras_restantes = len(palabras_sopa)
