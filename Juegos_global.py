@@ -39,7 +39,8 @@ print(f"\n  {MAGENTA}[0]{RESET} {BOLD}Salir{RESET}")
 print("\n")
 
 # Guardamos la respuesta en una variable
-opcion = input(f"{YELLOW}>> Elige una opción: {RESET}")
+print(f"{YELLOW}>> Elige una opción: {RESET}",end="")
+opcion = input()
 
 # Aquí puedes continuar con tus ifs
 if opcion == "1":
