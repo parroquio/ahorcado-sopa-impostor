@@ -1,11 +1,6 @@
-# REVISAR TEMPORIZADOR
-
-
 import random
 import os
 import time
-import sys
-import select
 import msvcrt
 
 palabras = [
@@ -203,7 +198,9 @@ while res == "s" or res == "S":
             if input_detected:
                 break
                 
-            segundos -= 1
+        if input_detected:
+            break
+        segundos -= 1
 
     os.system('cls')
     print("\n¡Tiempo agotado! Es hora de votar.")
