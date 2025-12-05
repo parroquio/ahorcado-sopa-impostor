@@ -1,8 +1,6 @@
 import os
 import time
-import sys
 import random
-import select
 from IPython.display import clear_output
 import msvcrt
 
