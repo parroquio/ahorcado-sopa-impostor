@@ -313,9 +313,9 @@ def imprimir_matriz(matriz,modo):
         print("-")
         for i in range(len(matriz)):
             if i <= 8:
-                print(f"\033[38;5;208m{i+1}{" |"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{' |'}\033[0m", end="")
             else:
-                print(f"\033[38;5;208m{i+1}{"|"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{'|'}\033[0m", end="")
             for j in range(len(matriz[0])):
                 print(matriz[i][j], end="   ")
             print()
@@ -341,9 +341,9 @@ def imprimir_matriz(matriz,modo):
 
         for i in range(len(matriz)):
             if i <= 8:
-                print(f"\033[38;5;208m{i+1}{" |"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{' |'}\033[0m", end="")
             else:
-                print(f"\033[38;5;208m{i+1}{"|"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{'|'}\033[0m", end="")
             for j in range(len(matriz[0])):
                 print(matriz[i][j], end="    ")
             print()
@@ -819,19 +819,19 @@ def pedir_letra():
             print()
             print('Has introducido mas de un elemento, intentalo de nuevo.')
             print()
-            continue
+            continue #la funcion vuelve a empezar
         
         if letra.upper() == 'Ñ':
             print()
             print('La letra ñ no esta permitida.')
             print()
-            continue
+            continue #la funcion vuelve a empezar
 
         if not(letra.upper() in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
             print()
             print('Solo son validas las letras del abecedario, intentalo de nuevo')
             print()
-            continue
+            continue #la funcion vuelve a empezar
             
         return letra
     
@@ -846,6 +846,7 @@ def mostrar_progreso(palabra, letras_acertadas):
             progreso.append('_')
     print(*progreso)
 
+#funcion que imprime el dibujo correspondiente en base a los fallos
 def mostrar_dibujo(fallos):
     
     if fallos == 0:
@@ -865,6 +866,7 @@ def mostrar_dibujo(fallos):
     elif fallos >= 7:
         ultimo_dibujo()
 
+#Pantalla principal
 # Colores ANSI
 RESET = "\033[0m"
 BOLD = "\033[1m"
@@ -903,6 +905,7 @@ print("\n")
 print(f"{YELLOW}>> Elige una opción: {RESET}",end="")
 opcion = input()
 
+#SOPA DE LETRAS
 if opcion == "1":
     #Lista de las palabras que pueden aparecer en la sopa
     palabras = ["ABEJA", "ABECEDA", "ACORDEON", "ADULTO", "ADOPCION", "AGUA", "AIRE", "ALBUM",
@@ -996,11 +999,8 @@ if opcion == "1":
         tamaño=int(tamaño)
         #pone un limite a el número de palabras que puede añadir para ese tamaño de sopa
         max_palabras_por_sopa=None
-        if tamaño==4:
-            max_palabras_por_sopa="2"
-        else:
-            max_palabras_por_sopa=tamaño-1
-            max_palabras_por_sopa=str(max_palabras_por_sopa)
+        max_palabras_por_sopa=tamaño-2
+        max_palabras_por_sopa=str(max_palabras_por_sopa)
         #pide cuantas palabras quiere en la sopa con el maximo ya establecido y verifica que este dentro del rango y sea un número
         time.sleep(1)
         palabras_por_sopa=input(f"Introduce de cuantas palabras quieres que haya en la sopa (Max {max_palabras_por_sopa}): ")
@@ -1050,7 +1050,7 @@ if opcion == "1":
         print("Quieres seguir jugando (Introduce 's' si quieres seguir jugando y cualquier otra letra si no)?")
         n=input()
     
-
+#IMPOSTOR
 elif opcion == "2":
 
     palabras = [
@@ -1314,10 +1314,8 @@ elif opcion == "2":
                         input("Presiona Enter para ocultar tu rol...")
                         os.system('cls')
 
-
-
-elif opcion == "3":
-    #CODIGO DEL AHORCADO#
+#AHORCADO
+elif opcion == "3":  
     N = 8
 
     #Listas
@@ -1332,10 +1330,12 @@ elif opcion == "3":
     Palabras_7_letras = ["ZAPATOS", "BOTELLA", "VENTANA", "PUERTAS", "COCINAS","LIBRERO", "ARMARIO", "ANILLOS", 
                         "ESTUCHE", "PELUCHE","CARPETA", "PLANETA", "CABALLO", "CARRERA", "CAMINOS"]
     
+    #Introducción
     print()
     print('Has escogido jugar el juego AHORCADO')
     print()
     
+    #Saca un número aleatorio
     x = random.randint(0, 14)
     
     palabra = elegir_longitud(x)
@@ -1343,46 +1343,45 @@ elif opcion == "3":
     letras_falladas = []
     fallos = 0
     max_falllos = 7
-    
+
     #en el siguiente while entra si se pueden hacer mas fallos y si hay mas letras para adivinar
     while fallos < max_falllos and len(letras_acertadas) < len(set(palabra)):
-
-        os.system('cls')
-        mostrar_dibujo(fallos)
     
         mostrar_progreso(palabra, letras_acertadas)
-    
+        #aqui se muestran los fallos
         print()
         print('Letras falladas: ', *letras_falladas or 'ninguna')
         print()
-    
+        #llamamos a la funcion pedir letra
         letra = pedir_letra()
-    
+        #comprobueba si la letra introducida ya habia sido usada
         if (letra in letras_acertadas) or (letra in letras_falladas):
             print()
             print('Ya habias usado esta letra, prueba con otra.')
             print()
-            continue
-        
+            continue #la funcion vuelve a empezar
+        #Si acierta la letra, imprime la frase
         if letra in palabra:
             letras_acertadas.append(letra)
             print()
             print('Has acertado la letra!!')
             print()
-    
+        #Si falla la letra, imprime la frase
         else: 
             fallos += 1
             letras_falladas.append(letra)
             print()
             print('Has fallado. Es el fallo numero {}'.format(fallos))
             print()
-    
+            mostrar_dibujo(fallos)
+    #imprime la palabra que buscaba, y la frase de la victoria
     if len(letras_acertadas) == len(set(palabra)):
         print()
         mostrar_progreso(palabra, letras_acertadas)
         print()
         print('ENHORABUENA!! Has adivinado la palabra que buscabas')
         print()
+    #Si no ha acertado la palabra, imprime la frase y la palabra que estaba buscando
     else:
         print()
         print('¡¡¡¡AHORCADO!!!! :( ')
