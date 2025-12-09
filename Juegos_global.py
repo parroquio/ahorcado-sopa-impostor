@@ -12,7 +12,6 @@ def inicializar_matriz (tamaño):
     for i in range(tamaño):
         fila=[0]*tamaño
         matriz.append(fila.copy())
-
 #La funcion que elige una palabra de la lista, la añade con direccion y orientacion random y verifica que no moleste con otras
 def elegir_colocar_palabra(matriz,palabras,tamaño):
     #elige una palabra random de la lista
