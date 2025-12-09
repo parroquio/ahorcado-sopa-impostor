@@ -999,11 +999,8 @@ if opcion == "1":
         tamaño=int(tamaño)
         #pone un limite a el número de palabras que puede añadir para ese tamaño de sopa
         max_palabras_por_sopa=None
-        if tamaño==4:
-            max_palabras_por_sopa="2"
-        else:
-            max_palabras_por_sopa=tamaño-1
-            max_palabras_por_sopa=str(max_palabras_por_sopa)
+        max_palabras_por_sopa=tamaño-2
+        max_palabras_por_sopa=str(max_palabras_por_sopa)
         #pide cuantas palabras quiere en la sopa con el maximo ya establecido y verifica que este dentro del rango y sea un número
         time.sleep(1)
         palabras_por_sopa=input(f"Introduce de cuantas palabras quieres que haya en la sopa (Max {max_palabras_por_sopa}): ")
