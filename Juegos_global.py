@@ -846,6 +846,7 @@ def mostrar_progreso(palabra, letras_acertadas):
             progreso.append('_')
     print(*progreso)
 
+#funcion que imprime el dibujo correspondiente en base a los fallos
 def mostrar_dibujo(fallos):
     
     if fallos == 0:
@@ -865,6 +866,7 @@ def mostrar_dibujo(fallos):
     elif fallos >= 7:
         ultimo_dibujo()
 
+#Pantalla principal
 # Colores ANSI
 RESET = "\033[0m"
 BOLD = "\033[1m"
@@ -903,6 +905,7 @@ print("\n")
 print(f"{YELLOW}>> Elige una opción: {RESET}",end="")
 opcion = input()
 
+#SOPA DE LETRAS
 if opcion == "1":
     #Lista de las palabras que pueden aparecer en la sopa
     palabras = ["ABEJA", "ABECEDA", "ACORDEON", "ADULTO", "ADOPCION", "AGUA", "AIRE", "ALBUM",
@@ -1050,7 +1053,7 @@ if opcion == "1":
         print("Quieres seguir jugando (Introduce 's' si quieres seguir jugando y cualquier otra letra si no)?")
         n=input()
     
-
+#IMPOSTOR
 elif opcion == "2":
 
     palabras = [
@@ -1314,10 +1317,8 @@ elif opcion == "2":
                         input("Presiona Enter para ocultar tu rol...")
                         os.system('cls')
 
-
-
-elif opcion == "3":
-    #CODIGO DEL AHORCADO#
+#AHORCADO
+elif opcion == "3":  
     N = 8
 
     #Listas
@@ -1343,7 +1344,7 @@ elif opcion == "3":
     letras_falladas = []
     fallos = 0
     max_falllos = 7
-    
+
     #en el siguiente while entra si se pueden hacer mas fallos y si hay mas letras para adivinar
     while fallos < max_falllos and len(letras_acertadas) < len(set(palabra)):
     
