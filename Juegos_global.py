@@ -656,7 +656,7 @@ elif opcion == "2":
     time.sleep(2.5)
     print("Al finalizar cada ronda, el pueblo debe votar quién creen que es el impostor.")
     time.sleep(3)
-    print("El jugador con más votos será el impostor.")
+    print("El jugador con más votos será expulsado.")
     time.sleep(2.5)
     print("Si hay empate, o todos los votos en blanco, no se expulsa a nadie.")
     time.sleep(3)
