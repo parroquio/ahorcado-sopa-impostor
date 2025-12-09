@@ -819,19 +819,19 @@ def pedir_letra():
             print()
             print('Has introducido mas de un elemento, intentalo de nuevo.')
             print()
-            continue
+            continue #la funcion vuelve a empezar
         
         if letra.upper() == 'Ñ':
             print()
             print('La letra ñ no esta permitida.')
             print()
-            continue
+            continue #la funcion vuelve a empezar
 
         if not(letra.upper() in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
             print()
             print('Solo son validas las letras del abecedario, intentalo de nuevo')
             print()
-            continue
+            continue #la funcion vuelve a empezar
             
         return letra
     
