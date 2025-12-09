@@ -4,6 +4,13 @@ import random
 from IPython.display import clear_output
 import msvcrt
 
+#Funciones del impostor
+
+def seleccionar_impostor(n):
+    #Esta funncion determina al impostor, siendo el n-ésimo jugador.
+    impostor = random.randint(0, n-1)
+    return impostor
+
 # Colores ANSI
 RESET = "\033[0m"
 BOLD = "\033[1m"
@@ -633,13 +640,6 @@ elif opcion == "2":
     "pueblo", "ciudad", "barrio", "calle", "plaza", "avenida", "carretera", "semáforo", "puerto", "aeropuerto",
     "tren", "autobús", "tranvía", "taxista", "billete", "tarjeta", "máquina", "ticket", "parada", "estación"
     ]
-
-    def seleccionar_impostor(n):
-        #Esta funncion determina al impostor, siendo el n-ésimo jugador.
-        impostor = random.randint(0, n-1)
-        return impostor
-
-
 
     #Texto inicial que explica el juego.
     os.system('cls')
