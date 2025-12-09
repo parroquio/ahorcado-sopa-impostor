@@ -1346,6 +1346,9 @@ elif opcion == "3":
     
     #en el siguiente while entra si se pueden hacer mas fallos y si hay mas letras para adivinar
     while fallos < max_falllos and len(letras_acertadas) < len(set(palabra)):
+
+        os.system('cls')
+        mostrar_dibujo(fallos)
     
         mostrar_progreso(palabra, letras_acertadas)
     
@@ -1373,7 +1376,6 @@ elif opcion == "3":
             print()
             print('Has fallado. Es el fallo numero {}'.format(fallos))
             print()
-            mostrar_dibujo(fallos)
     
     if len(letras_acertadas) == len(set(palabra)):
         print()
