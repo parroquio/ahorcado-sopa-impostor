@@ -4,50 +4,9 @@ import random
 from IPython.display import clear_output
 import msvcrt
 
-#Funciones del impostor
 
-def seleccionar_impostor(n):
-    #Esta funncion determina al impostor, siendo el n-ésimo jugador.
-    impostor = random.randint(0, n-1)
-    return impostor
+#Funciones de la Sopa de letras
 
-# Colores ANSI
-RESET = "\033[0m"
-BOLD = "\033[1m"
-RED = "\033[31m"
-GREEN = "\033[32m"
-YELLOW = "\033[33m"
-BLUE = "\033[34m"
-MAGENTA = "\033[35m"
-CYAN = "\033[36m"
-WHITE = "\033[37m"
-
-def clear():
-    os.system('cls')
-
-def print_header():
-    print(f"{CYAN}╔══════════════════════════════════════════════════════════════╗{RESET}")
-    print(f"{CYAN}║                                                              ║{RESET}")
-    print(f"{CYAN}║   {YELLOW}{BOLD}       S A L A   D E   J U E G O S   A R C A D E        {CYAN}   ║{RESET}")
-    print(f"{CYAN}║                                                              ║{RESET}")
-    print(f"{CYAN}╚══════════════════════════════════════════════════════════════╝{RESET}")
-    print()
-
-# Limpiamos la pantalla y mostramos el encabezado
-clear()
-print_header()
-
-# Mostramos las opciones
-print(f"{BOLD}Selecciona tu desafío:{RESET}\n")
-print(f"  {GREEN}[1]{RESET} {BOLD}Sopa de Letras{RESET}   {WHITE}- Encuentra las palabras ocultas{RESET}")
-print(f"  {RED}[2]{RESET} {BOLD}Impostor{RESET}         {WHITE}- Descubre al traidor entre nosotros{RESET}")
-print(f"  {BLUE}[3]{RESET} {BOLD}Ahorcado{RESET}         {WHITE}- Adivina la palabra antes de que sea tarde{RESET}")
-print(f"\n  {MAGENTA}[0]{RESET} {BOLD}Salir{RESET}")
-print("\n")
-
-# Guardamos la respuesta en una variable
-print(f"{YELLOW}>> Elige una opción: {RESET}",end="")
-opcion = input()
 #Funcion que crea una matriz de ceros del tamaño que pida el usuario
 def inicializar_matriz (tamaño):
     for i in range(tamaño):
@@ -391,6 +350,52 @@ def imprimir_matriz(matriz,modo):
             print()
         print()
         print("Palabras en la sopa: ", end="")
+
+#Funciones del impostor
+
+def seleccionar_impostor(n):
+    #Esta funncion determina al impostor, siendo el n-ésimo jugador.
+    impostor = random.randint(0, n-1)
+    return impostor
+
+# Colores ANSI
+RESET = "\033[0m"
+BOLD = "\033[1m"
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
+CYAN = "\033[36m"
+WHITE = "\033[37m"
+
+def clear():
+    os.system('cls')
+
+def print_header():
+    print(f"{CYAN}╔══════════════════════════════════════════════════════════════╗{RESET}")
+    print(f"{CYAN}║                                                              ║{RESET}")
+    print(f"{CYAN}║   {YELLOW}{BOLD}       S A L A   D E   J U E G O S   A R C A D E        {CYAN}   ║{RESET}")
+    print(f"{CYAN}║                                                              ║{RESET}")
+    print(f"{CYAN}╚══════════════════════════════════════════════════════════════╝{RESET}")
+    print()
+
+# Limpiamos la pantalla y mostramos el encabezado
+clear()
+print_header()
+
+# Mostramos las opciones
+print(f"{BOLD}Selecciona tu desafío:{RESET}\n")
+print(f"  {GREEN}[1]{RESET} {BOLD}Sopa de Letras{RESET}   {WHITE}- Encuentra las palabras ocultas{RESET}")
+print(f"  {RED}[2]{RESET} {BOLD}Impostor{RESET}         {WHITE}- Descubre al traidor entre nosotros{RESET}")
+print(f"  {BLUE}[3]{RESET} {BOLD}Ahorcado{RESET}         {WHITE}- Adivina la palabra antes de que sea tarde{RESET}")
+print(f"\n  {MAGENTA}[0]{RESET} {BOLD}Salir{RESET}")
+print("\n")
+
+# Guardamos la respuesta en una variable
+print(f"{YELLOW}>> Elige una opción: {RESET}",end="")
+opcion = input()
+
 if opcion == "1":
     #Lista de las palabras que pueden aparecer en la sopa
     palabras = ["ABEJA", "ABECEDA", "ACORDEON", "ADULTO", "ADOPCION", "AGUA", "AIRE", "ALBUM",
