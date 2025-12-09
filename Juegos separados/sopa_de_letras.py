@@ -1,5 +1,6 @@
 import os
 import time
+import random
 
 #funcion que limpia pantalla
 def clear_output(wait=False):
