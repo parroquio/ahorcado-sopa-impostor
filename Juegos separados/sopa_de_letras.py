@@ -2,9 +2,9 @@ import random
 import time
 import os
 
+#funcion que llimpia pantalla
 def clear_output(wait=False):
-    # Función para limpiar la pantalla de la terminal
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
 
 #funcion que inicializa una matriz de ceros del tamaño que diga el usuario
 def inicializar_matriz(tamaño):
@@ -481,11 +481,8 @@ while n == "s" or n == "S":
     tamaño = int(tamaño)
     # pone un limite a el número de palabras que puede añadir para ese tamaño de sopa
     max_palabras_por_sopa = None
-    if tamaño == 4:
-        max_palabras_por_sopa = "2"
-    else:
-        max_palabras_por_sopa = tamaño - 1
-        max_palabras_por_sopa = str(max_palabras_por_sopa)
+    max_palabras_por_sopa = tamaño - 2
+    max_palabras_por_sopa = str(max_palabras_por_sopa)
     # pide cuantas palabras quiere en la sopa con el maximo ya establecido y verifica que este dentro del rango y sea un número
     time.sleep(1.5)
     palabras_por_sopa = input(
