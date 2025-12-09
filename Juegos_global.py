@@ -1333,10 +1333,12 @@ elif opcion == "3":
     Palabras_7_letras = ["ZAPATOS", "BOTELLA", "VENTANA", "PUERTAS", "COCINAS","LIBRERO", "ARMARIO", "ANILLOS", 
                         "ESTUCHE", "PELUCHE","CARPETA", "PLANETA", "CABALLO", "CARRERA", "CAMINOS"]
     
+    #Introducción
     print()
     print('Has escogido jugar el juego AHORCADO')
     print()
     
+    #Saca un número aleatorio
     x = random.randint(0, 14)
     
     palabra = elegir_longitud(x)
@@ -1349,25 +1351,25 @@ elif opcion == "3":
     while fallos < max_falllos and len(letras_acertadas) < len(set(palabra)):
     
         mostrar_progreso(palabra, letras_acertadas)
-    
+        #aqui se muestran los fallos
         print()
         print('Letras falladas: ', *letras_falladas or 'ninguna')
         print()
-    
+        #llamamos a la funcion pedir letra
         letra = pedir_letra()
-    
+        #comprobueba si la letra introducida ya habia sido usada
         if (letra in letras_acertadas) or (letra in letras_falladas):
             print()
             print('Ya habias usado esta letra, prueba con otra.')
             print()
-            continue
-        
+            continue #la funcion vuelve a empezar
+        #Si acierta la letra, imprime la frase
         if letra in palabra:
             letras_acertadas.append(letra)
             print()
             print('Has acertado la letra!!')
             print()
-    
+        #Si falla la letra, imprime la frase
         else: 
             fallos += 1
             letras_falladas.append(letra)
@@ -1375,13 +1377,14 @@ elif opcion == "3":
             print('Has fallado. Es el fallo numero {}'.format(fallos))
             print()
             mostrar_dibujo(fallos)
-    
+    #imprime la palabra que buscaba, y la frase de la victoria
     if len(letras_acertadas) == len(set(palabra)):
         print()
         mostrar_progreso(palabra, letras_acertadas)
         print()
         print('ENHORABUENA!! Has adivinado la palabra que buscabas')
         print()
+    #Si no ha acertado la palabra, imprime la frase y la palabra que estaba buscando
     else:
         print()
         print('¡¡¡¡AHORCADO!!!! :( ')
