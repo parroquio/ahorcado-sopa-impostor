@@ -2,6 +2,8 @@
 
 Este proyecto de informática consiste en el desarrollo de una pequeña sala de juegos *arcade* implementada en Python. El corazón del proyecto es una interfaz principal desde la que el usuario puede navegar y seleccionar entre tres minijuegos distintos.
 
+El archivo a ejecutar es el archivo **"Juegos_global.py"**. No obstante, dentro de la carpeta "Juegos separados" se encuentran los archivos de cada juego por separado como demostración del trabajo realizado por cada integrante.
+
 A través del menú principal, el jugador puede acceder a tres juegos diferentes: La sopa de letras, el impostor y el ahorcado.
 
 Cada uno de estos tres juegos ha sido diseñado y programado por un miembro del grupo. En las secciones siguientes se detalla qué ha realizado cada integrante en el proyecto.
