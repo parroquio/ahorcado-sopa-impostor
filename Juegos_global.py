@@ -313,9 +313,9 @@ def imprimir_matriz(matriz,modo):
         print("-")
         for i in range(len(matriz)):
             if i <= 8:
-                print(f"\033[38;5;208m{i+1}{" |"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{' |'}\033[0m", end="")
             else:
-                print(f"\033[38;5;208m{i+1}{"|"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{'|'}\033[0m", end="")
             for j in range(len(matriz[0])):
                 print(matriz[i][j], end="   ")
             print()
@@ -341,9 +341,9 @@ def imprimir_matriz(matriz,modo):
 
         for i in range(len(matriz)):
             if i <= 8:
-                print(f"\033[38;5;208m{i+1}{" |"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{' |'}\033[0m", end="")
             else:
-                print(f"\033[38;5;208m{i+1}{"|"}\033[0m", end="")
+                print(f"\033[38;5;208m{i+1}{'|'}\033[0m", end="")
             for j in range(len(matriz[0])):
                 print(matriz[i][j], end="    ")
             print()
