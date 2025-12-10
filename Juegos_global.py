@@ -867,6 +867,7 @@ def mostrar_dibujo(fallos):
         ultimo_dibujo()
 
 #Pantalla principal
+
 # Colores ANSI
 RESET = "\033[0m"
 BOLD = "\033[1m"

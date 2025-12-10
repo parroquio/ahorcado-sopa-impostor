@@ -3,6 +3,12 @@ import os
 import time
 import msvcrt
 
+
+def seleccionar_impostor(n):
+    #Esta funncion determina al impostor, siendo el n-ésimo jugador.
+    impostor = random.randint(0, n-1)
+    return impostor
+
 palabras = [
     # Redes Sociales y Tecnología (Simplificada)
     "historia", "perfil", "usuario", "etiqueta", "filtro", "directo", "reels", "meme", "tendencia", "viral",
@@ -101,10 +107,7 @@ palabras = [
     "tren", "autobús", "tranvía", "taxista", "billete", "tarjeta", "máquina", "ticket", "parada", "estación"
     ]
 
-def seleccionar_impostor(n):
-    #Esta funncion determina al impostor, siendo el n-ésimo jugador.
-    impostor = random.randint(0, n-1)
-    return impostor
+
 
 
 
